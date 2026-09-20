@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know Your Vaccine - Illustrated Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #008b8b;
+            --secondary-color: #4ecdc4;
+            --accent-color: #feca57;
+            --background-color: #f7f7f7;
+            --text-color: #2d3436;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1200/400') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #fff;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--secondary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+
+        .vaccine-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            perspective: 1000px;
+        }
+
+        .vaccine-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: var(--accent-color);
+            border: 4px solid var(--secondary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid var(--secondary-color);
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--secondary-color);
+        }
+
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid var(--secondary-color);
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--secondary-color) transparent transparent;
+        }
+
+        .right::after {
+            left: -16px;
+        }
+
+        .vaccine-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+        }
+
+        .vaccine-item:hover .vaccine-content {
+            transform: rotateY(10deg);
+            box-shadow: 0 20px 40px rgba(50,50,93,.2), 0 10px 20px rgba(0,0,0,.1);
+        }
+
+        .vaccine-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .vaccine-details p {
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .vaccine-details strong {
+            color: var(--secondary-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            background-color: var(--primary-color);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1200/400') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        footer p {
+            position: relative;
+            z-index: 2;
+        }
+
+        @media screen and (max-width: 600px) {
+            .timeline::after {
+                left: 31px;
+            }
+
+            .vaccine-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .vaccine-item::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
+
+            .left::after, .right::after {
+                left: 15px;
+            }
+
+            .right {
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-content container">
+            <h1>Know Your Vaccine</h1>
+            <p class="subtitle">Explore the illustrated timeline of vaccines in the Indian immunization schedule</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="timeline">
+            <div class="vaccine-item left">
+                <div class="vaccine-content">
+                    <img src="../Assets/Templetes/Main/img/vaccines/BCG vaccine.jpg" alt="BCG Vaccine" class="vaccine-image">
+                    <h2>BCG</h2>
+                    <div class="vaccine-details">
+                        <p><strong>Description:</strong> Protects against tuberculosis (TB).</p>
+                        <p><strong>Dosage:</strong> Single dose at birth.</p>
+                        <p><strong>Method:</strong> Intradermal injection.</p>
+                        <p><strong>Side Effects:</strong> Localized skin reaction, mild fever.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="vaccine-item right">
+                <div class="vaccine-content">
+                    <img src="../Assets/Templetes/Main/img/vaccines/OPV2.jfif" alt="OPV Vaccine" class="vaccine-image">
+                    <h2>OPV</h2>
+                    <div class="vaccine-details">
+                        <p><strong>Description:</strong> Provides immunity against poliovirus.</p>
+                        <p><strong>Dosage:</strong> Multiple doses: birth, 6, 10, 14 weeks.</p>
+                        <p><strong>Method:</strong> Oral drops.</p>
+                        <p><strong>Side Effects:</strong> Rare cases of vaccine-derived polio.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="vaccine-item left">
+                <div class="vaccine-content">
+                    <img src="../Assets/Templetes/Main/img/vaccines/hepatitis-b.jpeg" alt="Hepatitis B Vaccine" class="vaccine-image">
+                    <h2>Hepatitis B</h2>
+                    <div class="vaccine-details">
+                        <p><strong>Description:</strong> Prevents Hepatitis B infection.</p>
+                        <p><strong>Dosage:</strong> Birth, 6, 10, 14 weeks.</p>
+                        <p><strong>Method:</strong> Intramuscular injection.</p>
+                        <p><strong>Side Effects:</strong> Pain at injection site, mild fever.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="vaccine-item right">
+                <div class="vaccine-content">
+                    <img src="../Assets/Templetes/Main/img/vaccines/MMR2.jfif" alt="MMR Vaccine" class="vaccine-image">
+                    <h2>MMR</h2>
+                    <div class="vaccine-details">
+                        <p><strong>Description:</strong> Protects against measles, mumps, rubella.</p>
+                        <p><strong>Dosage:</strong> Two doses: 9-12 months, 16-24 months.</p>
+                        <p><strong>Method:</strong> Subcutaneous injection.</p>
+                        <p><strong>Side Effects:</strong> Rash, fever, joint pain (rubella).</p>
+                    </div>
+                </div>
+            </div>
+    <div class="vaccine-item left">
+        <div class="vaccine-content">
+            <img src="../Assets/Templetes/Main/img/vaccines/Rabies.jpg" alt="Anti-Rabies Vaccine" class="vaccine-image">
+            <h2>Anti-Rabies</h2>
+            <div class="vaccine-details">
+                <p><strong>Description:</strong> Prevents rabies infection after exposure.</p>
+                <p><strong>Dosage:</strong> 4 doses on days 0, 3, 7, and 14 after exposure.</p>
+                <p><strong>Method:</strong> Intramuscular injection.</p>
+                <p><strong>Side Effects:</strong> Pain at injection site, mild fever, headache.</p>
+            </div>
+        </div>
+    </div>
+    <div class="vaccine-item right">
+        <div class="vaccine-content">
+            <img src="../Assets/Templetes/Main/img/vaccines/Covid.png" alt="COVID-19 Vaccine" class="vaccine-image">
+            <h2>COVID-19</h2>
+            <div class="vaccine-details">
+                <p><strong>Description:</strong> Protects against SARS-CoV-2 virus.</p>
+                <p><strong>Dosage:</strong> Typically 2 doses, with boosters as recommended.</p>
+                <p><strong>Method:</strong> Intramuscular injection.</p>
+                <p><strong>Side Effects:</strong> Fatigue, headache, muscle pain, fever (usually mild).</p>
+            </div>
+        </div>
+    </div>
+    <div class="vaccine-item left">
+        <div class="vaccine-content">
+            <img src="../Assets/Templetes/Main/img/vaccines/Influenza.jfif" alt="Influenza Vaccine" class="vaccine-image">
+            <h2>Influenza (Flu)</h2>
+            <div class="vaccine-details">
+                <p><strong>Description:</strong> Protects against seasonal influenza viruses.</p>
+                <p><strong>Dosage:</strong> Annual vaccination recommended.</p>
+                <p><strong>Method:</strong> Intramuscular injection or nasal spray.</p>
+                <p><strong>Side Effects:</strong> Soreness at injection site, low-grade fever.</p>
+            </div>
+        </div>
+    </div>
+    <div class="vaccine-item right">
+        <div class="vaccine-content">
+            <img src="../Assets/Templetes/Main/img/vaccines/Typhoid.jpg" alt="Typhoid Vaccine" class="vaccine-image">
+            <h2>Typhoid</h2>
+            <div class="vaccine-details">
+                <p><strong>Description:</strong> Prevents typhoid fever.</p>
+                <p><strong>Dosage:</strong> Single dose, with boosters every 3 years if needed.</p>
+                <p><strong>Method:</strong> Intramuscular injection or oral capsules.</p>
+                <p><strong>Side Effects:</strong> Fever, headache, nausea (usually mild).</p>
+            </div>
+        </div>
+    </div>
+    <div class="vaccine-item left">
+        <div class="vaccine-content">
+            <img src="../Assets/Templetes/Main/img/vaccines/hepatitis A.jpg" alt="Hepatitis A Vaccine" class="vaccine-image">
+            <h2>Hepatitis A</h2>
+            <div class="vaccine-details">
+                <p><strong>Description:</strong> Protects against Hepatitis A virus infection.</p>
+                <p><strong>Dosage:</strong> Two doses, 6 months apart.</p>
+                <p><strong>Method:</strong> Intramuscular injection.</p>
+                <p><strong>Side Effects:</strong> Soreness at injection site, mild headache.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+    <footer>
+        <div class="footer-bg"></div>
+        <p>For more information, consult your healthcare provider.</p>
+    </footer>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know Your Vaccine - Comprehensive Illustrated Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ... (previous styles remain unchanged) ... */
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-content container">
+            <h1>Know Your Vaccine</h1>
+            <p class="subtitle">Explore the illustrated timeline of vaccines in the Indian immunization schedule and other common vaccines</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="timeline">
+            ... (previous vaccine entries remain unchanged) ... 
+
+            <div class="vaccine-item left">
+                <div class="vaccine-content">
+                    <img src="/api/placeholder/400/320" alt="Anti-Rabies Vaccine" class="vaccine-image">
+                    <h2>Anti-Rabies</h2>
+                    <div class="vaccine-details">
+                        <p><strong>Description:</strong> Prevents rabies infection after exposure.</p>
+                        <p><strong>Dosage:</strong> 4 doses on days 0, 3, 7, and 14 after exposure.</p>
+                        <p><strong>Method:</strong> Intramuscular injection.</p>
+                        <p><strong>Side Effects:</strong> Pain at injection site, mild fever, headache.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="vaccine-item right">
+                <div class="vaccine-content">
+                    <img src="/api/placeholder/400/320" alt="COVID-19 Vaccine" class="vaccine-image">
+                    <h2>COVID-19</h2>
+                    <div class="vaccine-details">
+                        <p><strong>Description:</strong> Protects against SARS-CoV-2 virus.</p>
+                        <p><strong>Dosage:</strong> Typically 2 doses, with boosters as recommended.</p>
+                        <p><strong>Method:</strong> Intramuscular injection.</p>
+                        <p><strong>Side Effects:</strong> Fatigue, headache, muscle pain, fever (usually mild).</p>
+                    </div>
+                </div>
+            </div>
+            <div class="vaccine-item left">
+                <div class="vaccine-content">
+                    <img src="/api/placeholder/400/320" alt="Influenza Vaccine" class="vaccine-image">
+                    <h2>Influenza (Flu)</h2>
+                    <div class="vaccine-details">
+                        <p><strong>Description:</strong> Protects against seasonal influenza viruses.</p>
+                        <p><strong>Dosage:</strong> Annual vaccination recommended.</p>
+                        <p><strong>Method:</strong> Intramuscular injection or nasal spray.</p>
+                        <p><strong>Side Effects:</strong> Soreness at injection site, low-grade fever.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="vaccine-item right">
+                <div class="vaccine-content">
+                    <img src="/api/placeholder/400/320" alt="Typhoid Vaccine" class="vaccine-image">
+                    <h2>Typhoid</h2>
+                    <div class="vaccine-details">
+                        <p><strong>Description:</strong> Prevents typhoid fever.</p>
+                        <p><strong>Dosage:</strong> Single dose, with boosters every 3 years if needed.</p>
+                        <p><strong>Method:</strong> Intramuscular injection or oral capsules.</p>
+                        <p><strong>Side Effects:</strong> Fever, headache, nausea (usually mild).</p>
+                    </div>
+                </div>
+            </div>
+            <div class="vaccine-item left">
+                <div class="vaccine-content">
+                    <img src="/api/placeholder/400/320" alt="Hepatitis A Vaccine" class="vaccine-image">
+                    <h2>Hepatitis A</h2>
+                    <div class="vaccine-details">
+                        <p><strong>Description:</strong> Protects against Hepatitis A virus infection.</p>
+                        <p><strong>Dosage:</strong> Two doses, 6 months apart.</p>
+                        <p><strong>Method:</strong> Intramuscular injection.</p>
+                        <p><strong>Side Effects:</strong> Soreness at injection site, mild headache.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-bg"></div>
+        <p>For more information and personalized vaccination schedules, consult your healthcare provider.</p>
+    </footer>
+</body>
+</html> -->
